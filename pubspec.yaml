@@ -1,22 +1,32 @@
 name: usbequipment
 description: "A new Flutter plugin project."
 version: 0.0.1
-homepage:
+# homepage:
 
 environment:
-  sdk: '>=3.2.3 <4.0.0'
-  flutter: '>=3.3.0'
+  sdk: ">=3.1.5 <4.0.0"
+  flutter: ">=3.2.6"
 
 dependencies:
   flutter:
     sdk: flutter
-  plugin_platform_interface: ^2.0.2
-  usb_serial: ^0.5.1
+  plugin_platform_interface: ^2.1.8
+  usb_serial: ^0.5.2
+
+  shenyukejiusb:
+    # path: C:/Users/cc/source/repos/Flutter/plugins/flutter_usb/shenyukejiusb
+    git:
+      url: https://gitee.com/cciii/flutter_usb.git
+      path: shenyukejiusb
+      ref: master
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+
+dependency_overrides:
+  ffi: ^2.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

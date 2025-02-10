@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:usb_serial/usb_serial.dart' as usb_serial;
+import 'package:shenyukejiusb/shenyukejiusb.dart' as shenyukejiusb;
 
 import 'usbequipment_platform_interface.dart';
 
 export 'package:usb_serial/usb_serial.dart';
 export 'package:usb_serial/transaction.dart';
+export 'package:shenyukejiusb/src/desktop.dart';
 
 // class UsbDevice extends usb_serial.UsbDevice {
 //   UsbDevice(
@@ -23,6 +25,7 @@ class Usbequipment {
   static UsbequipmentPlatform get instance {
     return UsbequipmentPlatform.instance;
   }
+
   // 获取系统版本
   static Future<String?> getPlatformVersion() {
     return UsbequipmentPlatform.instance.getPlatformVersion();
@@ -33,13 +36,16 @@ class Usbequipment {
   ///
   static Future<List<usb_serial.UsbDevice>> getUSBDeviceList() async {
     List<usb_serial.UsbDevice> deviceList = [];
-    if (Platform.isAndroid) {
-      deviceList = (await usb_serial.UsbSerial.listDevices())
-          .cast<usb_serial.UsbDevice>();
-    } else if (Platform.isWindows) {
-      deviceList = (await UsbequipmentPlatform.instance.listDevices())
-          .cast<usb_serial.UsbDevice>();
-    }
+    try {
+      if (Platform.isAndroid) {
+        deviceList = (await usb_serial.UsbSerial.listDevices())
+            .cast<usb_serial.UsbDevice>();
+      } else if (Platform.isWindows) {
+        /// Todo: windows 获取usb设备列表未完善
+        // deviceList = (await UsbequipmentPlatform.instance.listDevices())
+        //     .cast<usb_serial.UsbDevice>();
+      }
+    } catch (err) {}
     return deviceList;
   }
 
